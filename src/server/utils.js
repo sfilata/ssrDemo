@@ -1,15 +1,17 @@
 // server/utils.js
 import Routes from '../client/components/Routes';
 import { renderToString } from 'react-dom/server';
-import { renderRoutes } from 'react-router-config';
 
-import { ServerRouter } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
 import React from 'react'
-import Hello from '../client/components/Hello';
 
 export const render = (req) => {
   //构建服务端的路由
-  const content = renderToString(<Hello />);
+  const content = renderToString(
+    <StaticRouter location={req.path} >
+      {Routes}
+    </StaticRouter>
+  );
   return `<!DOCTYPE html>
   <html lang="en">
   <head>

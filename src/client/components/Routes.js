@@ -4,18 +4,9 @@ import Hello from './Hello';
 import Title from './Title';
 import App from '../index';
 
-export default [{
-  component: App,
-  routes: [
-    {
-      path: '/',
-      component: Hello,
-      exact: true,
-    },
-    {
-      path: '/title',
-      component: Title,
-      exact: true,
-    }
-  ]
-}]
+export default (
+  <div>
+    <Route path='/' exact component={Hello}></Route>
+    <Route path='/404' exact component={Title}></Route>
+  </div>
+)
