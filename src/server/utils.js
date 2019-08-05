@@ -1,5 +1,5 @@
 // server/utils.js
-import Routes from '../client/components/Routes';
+import Routes from '../client/Routes';
 import { renderToString } from 'react-dom/server';
 
 import { StaticRouter } from 'react-router-dom';
