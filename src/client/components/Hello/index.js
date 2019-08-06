@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getHomeList } from './store/actions';
-import { isRegExp } from 'util';
+import { Helmet } from 'react-helmet';
 
 class Hello extends React.Component {
   constructor(props) {
@@ -25,6 +25,10 @@ class Hello extends React.Component {
     ));
     return (
       <Fragment>
+        <Helmet>
+          <title>Welcome to SSR Demo</title>
+          <meta name="description" content="This is the welcome page!"></meta>
+        </Helmet>
         <h2 style={{ color: 'blue' }}>Hello {name} , SSR Demo</h2>
         <button onClick={() => { this.setState({name: 'naver'})}}>click</button>
         <div>
