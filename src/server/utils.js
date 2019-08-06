@@ -1,18 +1,17 @@
 // server/utils.js
-import Routes from '../client/Routes';
 import { renderToString } from 'react-dom/server';
-
+import { Route } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { getStore } from '../store';
+import { renderRoutes } from 'react-router-config';
 
-export const render = (req) => {
+export const render = (req, routes, store) => {
   //构建服务端的路由
   const content = renderToString(
-    <Provider store={getStore()}>
+    <Provider store={store}>
       <StaticRouter location={req.path} >
-        {Routes}
+        {renderRoutes(routes)}
       </StaticRouter>
     </Provider>
   );
@@ -26,6 +25,11 @@ export const render = (req) => {
   </head>
   <body>
     <div id="root">${content}</div>
+    <script>
+      window.context = {
+        state: ${JSON.stringify(store.getState())}
+      }
+    </script>
     <script src="/index.js"></script>
   </body>
   </html>`;

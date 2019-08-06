@@ -12,8 +12,9 @@ class Hello extends React.Component {
   }
 
   componentDidMount() {
-    const { getHomeList } = this.props;
-    getHomeList();
+    if (!this.props.list.length) {
+      this.props.getHomeList();
+    }
   }
 
   render () {
@@ -43,5 +44,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getHomeList());
   }
 })
+
+Hello.loadData = store => {
+  return store.dispatch(getHomeList());
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hello);

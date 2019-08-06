@@ -1,27 +1,31 @@
 import React, { Fragment } from 'react';
 import ReactDom from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import Routes from './Routes';
+import routes from '../Routes';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 
 import Hello from './components/Hello';
 import Header from './components/Header';
-import store from '../store';
+import { getClientStore } from '../store';
 
 const history = createMemoryHistory();
 
-const App = () => (
-  <Provider store={store}>
-    <Fragment>
-      <BrowserRouter>
-        <Header />
-        {Routes}
-      </BrowserRouter>
-    </Fragment>
-  </Provider>
-)
+
+const App = () => {
+  return (
+    <Provider store={getClientStore()}>
+      <Fragment>
+        <BrowserRouter>
+          <div>
+            {renderRoutes(routes)}
+          </div>
+        </BrowserRouter>
+      </Fragment>
+    </Provider>
+  )
+}
 
 if (typeof window !== 'undefined') {
   ReactDom.hydrate(<App />, document.getElementById('root'));
